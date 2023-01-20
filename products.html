@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <style>
+      * {
+        margin: 0px auto;
+        font-family: sans-serif;
+      }
+
+      .card_item {
+        font-size: 26px;
+        width: 65px;
+        height: 50px;
+        background-color: orangered;
+        border-radius: 50%;
+        padding: 11px;
+        border: 3px solid orangered;
+        cursor: pointer;
+      }
+      .container {
+        margin: 0xp auto;
+        max-width: 100%;
+     
+      }
+
+      .logo h1{
+        font-size: 50px;
+       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: darkblue;
+        width: 100px;
+      }
+
+      nav {
+        width: 100%;
+        height: 83px;
+        background-color: dodgerblue;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: fixed;
+        z-index: 9999999999;
+        box-shadow: 0px 20px 40px 0px #85858585;
+
+      }
+
+      .cart_items {
+        display: none;
+        position: absolute;
+        right: 20%;
+        top: 12%;
+        padding: 20px;
+        border-radius: 20px;
+        z-index: 2;
+        width: 700px;
+        box-shadow: 0px 20px 40px 0px #85858585;
+        border-bottom: 1px solid grey;
+        background-color: white;
+      }
+
+      .cart_item {
+        display: flex;
+        flex-direction: row;
+        justify-self: center;
+        align-items: center;
+        width: 700px;
+        border-bottom: 1px dashed tomato;
+       
+      }
+
+    
+
+      .cart_item > * {
+        margin: 20px;
+      }
+
+      .cart_item > img {
+        width: 150px;
+        height: 100px;
+        border-radius: 5px;
+      }
+
+      .btn__small {
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 0px;
+        border-radius: 10px;
+        margin: 10px;
+        background-color: dodgerblue;
+        color: white;
+        font-size: 19px;
+      }
+
+      .btn__remove {
+        background-color: red;
+        color: white;
+        cursor: pointer;
+      }
+
+      .check_out {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-self: center;
+        padding: 10px;
+      }
+
+      .total_cost {
+        position: relative;
+        top: 80%;
+        right: 20%;
+      }
+
+      .btn{
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 0px;
+        margin-left: 20px;
+        cursor: pointer;
+        background-color: dodgerblue;
+        color: white;
+        font-size: 18px;
+      }
+
+      .cart_items::before{
+        display: none;
+           content: '';
+           width: 30px;
+           height: 50px;
+           position: absolute;
+           top: -5%;
+           right: 35%;
+           background: white;
+           transform: rotate(45deg);
+           box-shadow: 2px 0px 10px -2px white;
+      }
+
+      .cart_items .active{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .products{
+         display: grid;
+         margin-top: 100px;
+         grid-gap: 20px;
+         grid-template-columns: repeat(3,1fr);
+      }
+
+      .products .product__element{
+        padding: 30px;
+        width: 300px;
+        height: 380px;
+        margin-bottom: 50px;
+        box-shadow: 0px 20px 20px 0px #85858585;
+      }
+
+      .products .product__element img{
+        position: relative;
+        left: 10%;
+        width: 80%;
+        border-radius: 20px;
+      }
+      .products .product__element .product__name{
+          font-size: 20px;
+          font-weight: 700px;
+          margin: 10px;
+          text-align: left;
+      }
+
+      .products .product__element .product__price{
+          font-size: 20px;
+          font-family: italic;
+          margin: 10px;
+      }
+
+
+      .btn_add_to_cart{
+        position: relative;
+        width: 80%;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        background-color: dodgerblue;
+        color: white;
+       text-align: center;
+    
+      }
+
+      
+
+      .btn_add_to_cart:hover{
+        background-color: rgb(29, 40, 61);
+      }
+
+      address{
+        width: 100%;
+        box-shadow: 0px 20px 20px 0px #85858585;
+        text-align: center;
+        height: 40px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <i class="bi bi-brightness-high-fill" id="toggleDark"></i>
+    <div class="container">
+        
+      <header>
+        <nav>
+          <div class="logo">
+            <h1>ASUS</h1>
+          </div>
+          <div class="card_item">
+            <i class="bi bi-cart3"></i>
+            <span id="total_count">0</span>
+          </div>
+        </nav>
+        <div class="cart">
+          <div class="cart_items ">    
+              <div class="check_out">
+                <h4>Total amount: $</h4>
+                <h4 class="total_cost"></h4>
+                <button class="btn check_out_btn">Check ouut</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="products">
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="1">
+          <img src="./images/assets/1.jpg" alt="" id="image" >
+          <h4 class="product__name">MacBook Air with M1 Chip</h4>
+          <h5 class="product__price">$890</h5>
+          <div class=" btn btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="2">
+          <img src="./images/assets/2.jpg" alt="" id="image" >
+          <h4 class="product__name">2-in-1 Headphone Stand with Wireless Charger</h4>
+          <h5 class="product__price">$290</h5>
+          <div class=" btn btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="3">
+          <img src="./images/assets/3.jpg" alt="" id="image" >
+          <h4 class="product__name">TUF Gaming VG32VQR Curved Monitor (32-inch)</h4>
+          <h5 class="product__price">$312</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="4">
+          <img src="./images/assets/4.jpg" alt="" id="image" >
+          <h4 class="product__name">SoundForm Elite Hi-Fi Smart Speaker + Wireless Charger</h4>
+          <h5 class="product__price">$28</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="5">
+          <img src="./images/assets/5.jpg" alt="" id="image" >
+          <h4 class="product__name">Link & Lock Carabiner for Apple AirTags</h4>
+          <h5 class="product__price">$46</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="6">
+          <img src="./images/assets/6.jpg" alt="" id="image" >
+          <h4 class="product__name">Shiatsu Back and Neck Massager</h4>
+          <h5 class="product__price">$68</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="7">
+          <img src="./images/assets/7.jpg" alt="" id="image" >
+          <h4 class="product__name">E5 Robot Vacuum and Mop</h4>
+          <h5 class="product__price">$468</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="8">
+          <img src="./images/assets/8.jpg" alt="" id="image" >
+          <h4 class="product__name">MagSafe 2-in-1 Wireless Charger</h4>
+          <h5 class="product__price">$468</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="9">
+          <img src="./images/assets/9.jpg" alt="" id="image" >
+          <h4 class="product__name">IApple Watch Series 8</h4>
+          <h5 class="product__price">$468</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="10">
+          <img src="./images/assets/10.jpg" alt="" id="image" >
+          <h4 class="product__name">iXpand Flash Drive Luxe</h4>
+          <h5 class="product__price">$36</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="11">
+          <img src="./images/assets/11.jpg" alt="" id="image" >
+          <h4 class="product__name">USB-C Car Charger</h4>
+          <h5 class="product__price">$16</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="12">
+          <img src="./images/assets/12.jpg" alt="" id="image" >
+          <h4 class="product__name">Torch USB Microphone</h4>
+          <h5 class="product__price">$28</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="13">
+          <img src="./images/assets/13.jpg" alt="" id="image" >
+          <h4 class="product__name">Q60B Series 4K Smart TV (55-inch)</h4>
+          <h5 class="product__price">$748</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="14">
+          <img src="./images/assets/14.jpg" alt="" id="image" >
+          <h4 class="product__name">Galaxy S22 Android Smartphone</h4>
+          <h5 class="product__price">$800</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="15">
+          <img src="./images/assets/15.jpg" alt="" id="image" >
+          <h4 class="product__name">Instinct 2S Solar Fitness Watch</h4>
+          <h5 class="product__price">$450</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="16">
+          <img src="./images/assets/16.jpg" alt="" id="image" >
+          <h4 class="product__name">Rugged Armor Case for Nintendo Switch OLED</h4>
+          <h5 class="product__price">$19</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="17">
+          <img src="./images/assets/17.jpg" alt="" id="image" >
+          <h4 class="product__name">MX Keys Mini Wireless Keyboard</h4>
+          <h5 class="product__price">$100</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="18">
+          <img src="./images/assets/18.jpg" alt="" id="image" >
+          <h4 class="product__name">Aluminum Dock for Apple MagSafe Charger</h4>
+          <h5 class="product__price">$50</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="19">
+          <img src="./images/assets/19.jpg" alt="" id="image" >
+          <h4 class="product__name">Go Air Pop True Wireless Earbuds</h4>
+          <h5 class="product__price">$468</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="20">
+          <img src="./images/assets/20.jpg" alt="" id="image" >
+          <h4 class="product__name">WLPP1CFH-1 Smart Plug</h4>
+          <h5 class="product__price">$68</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+        <div class="product__element">
+          <input type="hidden" name="" id="product__id" value="21">
+          <img src="./images/assets/21.jpg" alt="" id="image" >
+          <h4 class="product__name">Surface Pro 8 2-in-1 PC</h4>
+          <h5 class="product__price">$489</h5>
+          <div class=" btn_add_to_cart">Add To Cart</div>
+        </div>
+      </div>
+    </div>
+
+    <address>
+        Created by &copy; A&M &scap;
+    </address>
+
+    <script src="./JS/dark-mode.js"></script>
+    <script>
+      ///////////////////////////////////////////////////////////////////////////////
+      const  cartCounter = document.querySelector(".card_item")
+      const cartDOM = document.querySelector(".cart_items")
+      const addBtnCard = document.querySelectorAll(".btn_add_to_cart")
+      const totalCount = document.querySelector("#total_count")
+      const totalCost = document.querySelector(".total_cost")
+      let cartItems = [];
+
+    
+
+    cartDOM.style.display = "none"
+
+     cartCounter.addEventListener("click", () => {
+     if(cartDOM.style.display === "none"){
+        cartDOM.style.display = "block"
+   }else{
+     cartDOM.style.display = "none"
+   }
+     })
+
+
+
+      addBtnCard.forEach( btn => {
+
+        btn.addEventListener("click", () => {
+          let parentElement = btn.parentElement
+      // console.log(parentElement.querySelector(".product__price").innerText)
+      const product = {
+        id: parentElement.querySelector("#product__id").value ,
+        name: parentElement.querySelector(".product__name").innerText,
+        image: parentElement.querySelector("#image").getAttribute("src"),
+        price: parentElement.querySelector(".product__price").innerText.
+        replace("$",""),
+        quantity: 1
+      }
+      //console.log(product)
+
+      let isInCart = cartItems.filter(item => item.id === product.id).length > 0
+
+     // console.log(isInCart)
+     if(!isInCart){
+      addItemToTheDOM(product)
+     }else{
+      alert("Product alerady in the cart")
+      return
+     }
+
+     const cartDOMItems = document.querySelectorAll(".cart_item")
+
+     cartDOMItems.forEach(individualItem => {
+           if(individualItem.querySelector("#product__id").value === product.id){
+            increaseItem(individualItem,product)
+            decreaseItem(individualItem,product)
+            // removeItem(individualItem,product)
+
+           }
+     })
+
+
+     cartItems.push(product)   
+     calculateTotal()
+    })
+      
+      })
+
+
+      function addItemToTheDOM(product){
+        cartDOM.insertAdjacentHTML("afterbegin", ` 
+        <div class="cart_item">
+              <input type="hidden" name="" id="product__id" value="${product.id}"/>
+              <img
+                src="${product.image}"
+                alt=""
+                id=""
+                width="300px"
+              />
+              <h4 class="product__name">${product.name}</h4>
+              <a href="" class="btn__small" action="decrease">&minus;</a>
+              <h4 class="product__quantity">${product.quantity}</h4>
+              <a href="" class="btn__small" action="increase">&plus;</a>
+              <span class="pric__product">${product.price}</span>
+              <a href="" class="btn__small btn__remove" action=" remove"
+                >&times;</a
+              >
+        `)
+      }
+
+
+      function calculateTotal() {
+
+        let  total = 0
+        cartItems.forEach(item => {
+          total += item.quantity * item.price
+        })
+        totalCost.innerText = total
+        totalCount.innerText = cartItems.length
+      }
+ 
+     function increaseItem(individualItem,product){
+
+      individualItem.querySelector("[action='increase']").addEventListener("click", () => {
+
+        cartItems.forEach(cartItem => {
+          if(cartItem.id === product.id){
+            individualItem.querySelector(".product__quantity").innerText = ++cartItem.quantity;
+            calculateTotal()
+          }
+        })
+
+      })
+
+     }
+
+
+     function decreaseItem(individualItem,product){
+
+      individualItem.querySelector("[action='decrease']").addEventListener("click", () => {
+
+        cartItems.forEach(cartItem => {
+          if(cartItem.id === product.id){
+            if(cartItem.quantity > 1){
+              individualItem.querySelector(".product__quantity").innerText = --cartItem.quantity; 
+            }else{
+                 cartItems = cartItems.filter(newElements =>   newElements.id !== product.id)
+                 individualItem.remove();
+            }
+            calculateTotal()
+          }
+        })
+
+      })
+
+     }
+ 
+
+//   function removeItem(individualItem,product){
+
+//   individualItem.querySelector("[action='remove']").addEventListener("click", () => {
+
+//     cartItems.forEach (cartItem => {
+//       if(cartItem.id === product.id){         
+//              cartItems = cartItems.filter(newElements =>   newElements.id !== product.id)
+//              individualItem.remove();
+//              calculateTotal()
+//        }
+//           }
+//     )}
+//  )}
+
+
+ </script>
+  </body>
+</html>
+
