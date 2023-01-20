@@ -6,6 +6,7 @@
   bottom: 100px;
   margin: 10px;
   color: dodgerblue;
+  z-index: 99999999999999999999999999;
 }
 
 #burger {
